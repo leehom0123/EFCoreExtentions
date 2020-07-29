@@ -1,15 +1,24 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
+using System;
 using System.Collections.Generic;
-using static System.Linq.Expressions.Expression;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace EFCoreExtentions
+namespace Bit.Esms
 {
+    using System.Collections;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using static System.Linq.Expressions.Expression;
     public static class QueryableExtentions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TTarget"></typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public static IQueryable<TTarget> Select<TTarget>(this IQueryable<object> query)
         {
             return Queryable.Select(query, GetLamda<object, TTarget>(query.GetType().GetGenericArguments()[0]));
